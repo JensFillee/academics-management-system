@@ -25,21 +25,21 @@ class CreateTblColleges extends AbstractMigration
         ]);
         $table->addColumn('name', 'string', [
             'default' => null,
-            'limit' => 255,
+            'limit' => 120,
             'null' => false,
         ]);
         $table->addColumn('short_name', 'string', [
             'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'limit' => 50,
+            'null' => true,
         ]);
         $table->addColumn('description', 'text', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('location', 'text', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('total_faculty', 'integer', [
             'default' => null,
@@ -48,26 +48,26 @@ class CreateTblColleges extends AbstractMigration
         ]);
         $table->addColumn('cover_image', 'string', [
             'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'limit' => 220,
+            'null' => true,
         ]);
         $table->addColumn('contact_number', 'string', [
             'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'limit' => 30,
+            'null' => true,
         ]);
         $table->addColumn('email', 'string', [
             'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'limit' => 120,
+            'null' => true,
         ]);
         $table->addColumn('status', 'integer', [
-            'default' => null,
-            'limit' => 11,
+            'default' => 1,
+            'limit' => 5,
             'null' => false,
         ]);
         $table->addColumn('created_at', 'datetime', [
-            'default' => null,
+            'default' => 'CURRENT_TIMESTAMP',
             'null' => false,
         ]);
         $table->addPrimaryKey([

@@ -25,31 +25,31 @@ class CreateTblUsers extends AbstractMigration
         ]);
         $table->addColumn('name', 'string', [
             'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'limit' => 120,
+            'null' => true,
         ]);
         $table->addColumn('email', 'string', [
             'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'limit' => 120,
+            'null' => true,
         ]);
         $table->addColumn('phone_no', 'string', [
             'default' => null,
-            'limit' => 255,
+            'limit' => 30,
             'null' => false,
         ]);
         $table->addColumn('password', 'string', [
             'default' => null,
-            'limit' => 255,
+            'limit' => 120,
             'null' => false,
         ]);
         $table->addColumn('status', 'integer', [
-            'default' => null,
-            'limit' => 11,
+            'default' => 1,
+            'limit' => 5,
             'null' => false,
         ]);
         $table->addColumn('created_at', 'datetime', [
-            'default' => null,
+            'default' => 'CURRENT_TIMESTAMP',
             'null' => false,
         ]);
         $table->addPrimaryKey([

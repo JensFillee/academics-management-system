@@ -25,58 +25,60 @@ class CreateTblStudents extends AbstractMigration
         ]);
         $table->addColumn('name', 'string', [
             'default' => null,
-            'limit' => 255,
+            'limit' => 120,
             'null' => false,
         ]);
         $table->addColumn('email', 'string', [
             'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'limit' => 120,
+            'null' => true,
         ]);
         $table->addColumn('phone_no', 'string', [
             'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'limit' => 30,
+            'null' => true,
         ]);
         $table->addColumn('college_id', 'integer', [
             'default' => null,
-            'limit' => 11,
+            'limit' => 5,
             'null' => false,
         ]);
         $table->addColumn('branch_id', 'integer', [
             'default' => null,
-            'limit' => 11,
+            'limit' => 5,
             'null' => false,
         ]);
         $table->addColumn('address', 'text', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('blood_group', 'enum', [
             'default' => null,
             'null' => false,
+            'values' => array("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
         ]);
         $table->addColumn('gender', 'enum', [
             'default' => null,
             'null' => false,
+            'values' => array("male", "female", "others")
         ]);
         $table->addColumn('profile_image', 'string', [
             'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'limit' => 220,
+            'null' => true,
         ]);
         $table->addColumn('dob', 'string', [
             'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'limit' => 50,
+            'null' => true,
         ]);
         $table->addColumn('status', 'integer', [
-            'default' => null,
-            'limit' => 11,
+            'default' => 1,
+            'limit' => 5,
             'null' => false,
         ]);
         $table->addColumn('created_at', 'datetime', [
-            'default' => null,
+            'default' => 'CURRENT_TIMESTAMP',
             'null' => false,
         ]);
         $table->addPrimaryKey([
