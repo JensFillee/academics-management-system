@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routes configuration.
  *
@@ -23,6 +24,7 @@
 
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
+use Cake\Routing\Router;
 
 /*
  * The default class to use for all routes
@@ -41,8 +43,15 @@ use Cake\Routing\RouteBuilder;
  * inconsistently cased URLs when used with `:plugin`, `:controller` and
  * `:action` markers.
  */
+
 /** @var \Cake\Routing\RouteBuilder $routes */
 $routes->setRouteClass(DashedRoute::class);
+
+/* Application Routes */
+Router::prefix("admin", function (RouteBuilder $route) {
+    // homepage: index() of DashboardsController
+    $route->connect("/", ["controller" => "Dashboards", "action" => "index"]);
+});
 
 $routes->scope('/', function (RouteBuilder $builder) {
     /*
@@ -80,10 +89,10 @@ $routes->scope('/', function (RouteBuilder $builder) {
  * ```
  * $routes->scope('/api', function (RouteBuilder $builder) {
  *     // No $builder->applyMiddleware() here.
- *     
+ *
  *     // Parse specified extensions from URLs
  *     // $builder->setExtensions(['json', 'xml']);
- *     
+ *
  *     // Connect API actions here.
  * });
  * ```
