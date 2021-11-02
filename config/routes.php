@@ -72,13 +72,13 @@ Router::prefix("admin", function (RouteBuilder $route) {
 
     // staff routes
     $route->connect("/add-staff", ["controller" => "Staffs", "action" => "addStaff"]);
-    $route->connect("/list-staffs", ["controller" => "Staffs", "action" => "listStaffs"]);
+    $route->connect("/list-staff", ["controller" => "Staffs", "action" => "listStaff"]);
     $route->connect("/edit-staff/:id", ["controller" => "Staffs", "action" => "editStaff"], ["pass" => "id"]);
     $route->connect("delete-staff/:id", ["controller" => "Staffs", "action" => "deleteStaff"], ["pass" => "id"]);
 
     // reports routes
-    $route->connect("/college-report", ["controller" => "Reports", "action" => "collegesReport"]);
-    $route->connect("/student-report", ["controller" => "Reports", "action" => "studentsReport"]);
+    $route->connect("/colleges-report", ["controller" => "Reports", "action" => "collegesReport"]);
+    $route->connect("/students-report", ["controller" => "Reports", "action" => "studentsReport"]);
     $route->connect("/staff-report", ["controller" => "Reports", "action" => "staffsReport"]);
 });
 
