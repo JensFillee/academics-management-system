@@ -10,4 +10,24 @@ class StudentsController extends AppController
     {
         parent::initialize();
     }
+
+    public function addStudent()
+    {
+
+    }
+
+    public function listStudents()
+    {
+
+    }
+
+    public function editStudent($id = null)
+    {
+
+    }
+
+    public function deleteStudent($id = null)
+    {
+
+    }
 }
