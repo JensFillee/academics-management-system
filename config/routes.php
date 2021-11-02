@@ -51,6 +51,35 @@ $routes->setRouteClass(DashedRoute::class);
 Router::prefix("admin", function (RouteBuilder $route) {
     // homepage: index() of DashboardsController
     $route->connect("/", ["controller" => "Dashboards", "action" => "index"]);
+
+    // college routes
+    $route->connect("/add-college", ["controller" => "Colleges", "action" => "addCollege"]);
+    $route->connect("/list-colleges", ["controller" => "Colleges", "action" => "listColleges"]);
+    $route->connect("/edit-college/:id", ["controller" => "Colleges", "action" => "editCollege"], ["pass" => "id"]); // because "id" is used as a password in the URL
+    $route->connect("delete-college/:id", ["controller" => "Colleges", "action" => "deleteCollege"], ["pass" => "id"]);
+
+    // branch routes
+    $route->connect("/add-branch", ["controller" => "Branches", "action" => "addBranch"]);
+    $route->connect("/list-branches", ["controller" => "Branches", "action" => "listBranches"]);
+    $route->connect("/edit-branch/:id", ["controller" => "Branches", "action" => "editBranch"], ["pass" => "id"]);
+    $route->connect("delete-branch/:id", ["controller" => "Branches", "action" => "deleteBranch"], ["pass" => "id"]);
+
+    // student routes
+    $route->connect("/add-student", ["controller" => "Students", "action" => "addStudent"]);
+    $route->connect("/list-students", ["controller" => "Students", "action" => "listStudents"]);
+    $route->connect("/edit-student/:id", ["controller" => "Students", "action" => "editStudent"], ["pass" => "id"]);
+    $route->connect("delete-student/:id", ["controller" => "Students", "action" => "deleteStudent"], ["pass" => "id"]);
+
+    // staff routes
+    $route->connect("/add-staff", ["controller" => "Staffs", "action" => "addStaff"]);
+    $route->connect("/list-staffs", ["controller" => "Staffs", "action" => "listStaffs"]);
+    $route->connect("/edit-staff/:id", ["controller" => "Staffs", "action" => "editStaff"], ["pass" => "id"]);
+    $route->connect("delete-staff/:id", ["controller" => "Staffs", "action" => "deleteStaff"], ["pass" => "id"]);
+
+    // reports routes
+    $route->connect("/college-report", ["controller" => "Reports", "action" => "collegesReport"]);
+    $route->connect("/student-report", ["controller" => "Reports", "action" => "studentsReport"]);
+    $route->connect("/staff-report", ["controller" => "Reports", "action" => "staffsReport"]);
 });
 
 $routes->scope('/', function (RouteBuilder $builder) {
