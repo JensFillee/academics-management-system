@@ -39,6 +39,9 @@ class AppController extends Controller
      */
     public function initialize(): void
     {
+        // Also possible: define layout here --> used for all controllers (they extend AppController)
+        // $this->viewBuilder()->setLayout("admin");
+
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
