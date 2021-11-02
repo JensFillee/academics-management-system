@@ -10,4 +10,24 @@ class BranchesController extends AppController
     {
         parent::initialize();
     }
+
+    public function addBranch()
+    {
+
+    }
+
+    public function listBranches()
+    {
+
+    }
+
+    public function editBranch($id = null)
+    {
+
+    }
+
+    public function deleteBranch($id = null)
+    {
+
+    }
 }

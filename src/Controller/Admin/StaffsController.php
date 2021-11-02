@@ -10,4 +10,24 @@ class StaffsController extends AppController
     {
         parent::initialize();
     }
+
+    public function addStaff()
+    {
+
+    }
+
+    public function listStaffs()
+    {
+
+    }
+
+    public function editStaff($id = null)
+    {
+
+    }
+
+    public function deleteStaff($id = null)
+    {
+
+    }
 }
