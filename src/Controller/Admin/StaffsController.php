@@ -18,7 +18,7 @@ class StaffsController extends AppController
 
     }
 
-    public function listStaffs()
+    public function listStaff()
     {
 
     }

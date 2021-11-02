@@ -34,7 +34,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">Go to Colleges Report <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="<?= $this->Url->build('/admin/colleges-report', ["fullbase" => true])?>" class="small-box-footer">Go to Colleges Report <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- Students Card -->
@@ -49,7 +49,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">Go to Students Report <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="<?= $this->Url->build('/admin/students-report', ["fullbase" => true])?>" class="small-box-footer">Go to Students Report <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- Staff Card -->
@@ -64,7 +64,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">Go to Staff Report <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="<?= $this->Url->build('/admin/staff-report', ["fullbase" => true])?>" class="small-box-footer">Go to Staff Report <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
