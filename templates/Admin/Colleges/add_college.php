@@ -58,7 +58,7 @@ if (!empty($title)) {
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="dectription">Description</label>
+                                        <label for="description">Description</label>
                                         <textarea class="form-control" name="description" id="description" placeholder="Enter text"></textarea>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@ if (!empty($title)) {
   // open tag: <script>
   $this->Html->scriptStart(["block" => true]);
     // content of script tag
-    echo '$("#frm-add-college").validate()';
+    echo '$("#frm-add-college").validate();';
   // close tag: </script>
   $this->Html->scriptEnd();
 ?>
