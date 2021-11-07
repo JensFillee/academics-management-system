@@ -77,6 +77,16 @@
     ])
     ?>
 
+    <!-- area for scripts (ex. jquery.validate.min.js) -->
+    <?=
+      $this->fetch("bottomScriptLinks")
+    ?>
+
+    <!-- area for custom scripts -->
+    <?=
+      $this->fetch("script")
+    ?>
+
 </body>
 
 </html>
