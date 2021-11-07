@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Load title based on what title is set to in View (ex. $this->assign("title", $title); [$title comes from Controller: $this->set("title", "Add College | Academics Management");]) -->
     <title><?= $this->fetch("title") ?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
