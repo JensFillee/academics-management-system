@@ -136,7 +136,7 @@ if (!empty($title)) {
   // open tag: <script>
   $this->Html->scriptStart(["block" => true]);
     // content of script tag
-    echo '$("#frm-add-college").validate()';
+    echo '$("#frm-add-college").validate();';
   // close tag: </script>
   $this->Html->scriptEnd();
 ?>

@@ -4,6 +4,11 @@ if (!empty($title)) {
 }
 ?>
 
+<!-- css file for datepicker-plugin -->
+<?=
+$this->Html->css("pickmeup.css", ["block" => "topStyleLinks"])
+?>
+
 <style>
     #frm-add-branch label.error {
         color: red;
@@ -88,7 +93,7 @@ if (!empty($title)) {
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="total_faculty">Duration*</label>
+                                        <label for="total_durations">Duration*</label>
                                         <input class="form-control" type="number" required min="10" name="total_durations" id="total_durations" placeholder="Enter duration">
                                     </div>
                                 </div>
@@ -122,14 +127,20 @@ if (!empty($title)) {
 </section>
 
 <?=
-$this->Html->script("jquery.validate.min.js", ["block" => "bottomScriptLinks"]);
+$this->Html->script([
+    "jquery.validate.min.js",
+    "pickmeup.min.js" // for datepicker-plugin
+], ["block" => "bottomScriptLinks"]);
 ?>
 
 <?php
-// open tag: <script>
-$this->Html->scriptStart(["block" => true]);
-// content of script tag
-echo '$("#frm-add-branch").validate()';
-// close tag: </script>
-$this->Html->scriptEnd();
+  // open tag: <script>
+  $this->Html->scriptStart(["block" => true]);
+    // content of script tag
+    echo '$("#frm-add-branch").validate();';
+    echo 'pickmeup("input#start_date", { hide_on_select: true, position: "right"});';
+    echo 'pickmeup("input#end_date", { hide_on_select: true, position: "right"});';
+  // close tag: </script>
+  $this->Html->scriptEnd();
 ?>
+
