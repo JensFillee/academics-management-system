@@ -69,14 +69,8 @@
         "/plugins/jquery-ui/jquery-ui.min.js",
         // Bootstrap 4
         "/plugins/bootstrap/js/bootstrap.bundle.min.js",
-        // Tempusdominus Bootstrap 4
-        "/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
-        // overlayScrollbars
-        "/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
         // AdminLTE App
         "/dist/js/adminlte.js",
-        // AdminLTE dashboard demo (This is only for demo purposes)
-        "/dist/js/pages/dashboard.js",
     ])
     ?>
 
