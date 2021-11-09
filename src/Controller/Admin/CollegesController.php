@@ -99,6 +99,13 @@ class CollegesController extends AppController
 
     public function editCollege($id = null)
     {
+        $college = $this->Colleges->get($id, [
+            "contain" => [] /* right now: no assossiation with this table -> blank (?) */
+        ]);
+
+        // Create a 'colleges' variable to use in view
+        $this->set(compact("college"));
+
         $this->set("title", "Edit College | Academics Management");
     }
 

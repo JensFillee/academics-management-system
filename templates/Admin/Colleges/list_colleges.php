@@ -60,8 +60,8 @@ $this->html->css([
                                             <td><?= $college->short_name ?></td>
                                             <td><?= $this->Html->image("/" . $college->cover_image, ["style" => "width:70px;height:70px"]) ?></td> <!-- '/' because not in img-folder -->
                                             <td>
-                                                <a class="btn btn-warning" href="#">Edit</a>
-                                                <a class="btn btn-danger" href="#">Delete</a>
+                                                <a class="btn btn-warning" href="<?= $this->Url->build('/admin/edit-college/' . $college->id, ['fullBase' => true]) ?>"><i class="fa fa-pencil-alt"></i></a>
+                                                <a class="btn btn-danger" href="#"><i class="fa fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                 <?php
