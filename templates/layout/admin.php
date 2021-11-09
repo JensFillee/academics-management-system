@@ -49,6 +49,10 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            <!-- show Flash message -->
+            <!-- content it shows: see templates/element/flash/{success/danger}.php -->
+            <?= $this->Flash->render() ?>
+
             <!-- insert code from view that uses this template here (example: templates/Admin/Dashboards/index.php) -->
             <?= $this->fetch("content") ?>
         </div>
@@ -76,12 +80,12 @@
 
     <!-- area for scripts (ex. jquery.validate.min.js) -->
     <?=
-      $this->fetch("bottomScriptLinks")
+    $this->fetch("bottomScriptLinks")
     ?>
 
     <!-- area for custom scripts -->
     <?=
-      $this->fetch("script")
+    $this->fetch("script")
     ?>
 
 </body>
