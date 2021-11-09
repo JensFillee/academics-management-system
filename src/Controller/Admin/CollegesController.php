@@ -88,6 +88,12 @@ class CollegesController extends AppController
 
     public function listColleges()
     {
+        // Get all colleges
+        $colleges = $this->Colleges->find()->toList();
+
+        // Create a 'colleges' variable to use in view
+        $this->set(compact("colleges"));
+
         $this->set("title", "List Colleges | Academics Management");
     }
 

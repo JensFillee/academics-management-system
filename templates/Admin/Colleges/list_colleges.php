@@ -50,7 +50,24 @@ $this->html->css([
                                 </tr>
                             </thead>
                             <tbody>
-
+                                <?php
+                                if (count($colleges) > 0) {
+                                    foreach ($colleges as $index => $college) {
+                                ?>
+                                        <tr>
+                                            <td><?= $college->id ?></td>
+                                            <td><?= "<b>Name: </b>" . $college->name . "<br/><b>Email: </b>" . $college->email . "<br/><b>Phone number: </b>" . $college->contact_number ?></td>
+                                            <td><?= $college->short_name ?></td>
+                                            <td><?= $this->Html->image("/" . $college->cover_image, ["style" => "width:70px;height:70px"]) ?></td> <!-- '/' because not in img-folder -->
+                                            <td>
+                                                <a class="btn btn-warning" href="#">Edit</a>
+                                                <a class="btn btn-danger" href="#">Delete</a>
+                                            </td>
+                                        </tr>
+                                <?php
+                                    }
+                                }
+                                ?>
                             </tbody>
                             <tfoot>
                                 <tr>
