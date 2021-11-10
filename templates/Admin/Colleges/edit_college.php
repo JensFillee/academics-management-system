@@ -98,8 +98,9 @@ if (!empty($title)) {
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="cover_image">Cover Image*</label>
-                                    <input type="file" required name="cover_image" id="cover_image" class="form-control">
+                                    <!-- Not required on edit-page (if left empty -> use old image (see controller)) -->
+                                    <label for="cover_image">Cover Image</label>
+                                    <input type="file" name="cover_image" id="cover_image" class="form-control">
                                     <br/>
                                     <?= $this->Html->image("/" . $college->cover_image, ["style" => "width:100px; height:100px"]) ?>
                                 </div>
@@ -111,7 +112,7 @@ if (!empty($title)) {
                                     <label for="status">Status*</label>
                                     <select required class="form-control" name="status" id="status">
                                         <option <?= $college->status == 1 ? "selected" : "" ?> value="1">Active</option>
-                                        <option <?= $college->status == 1 ? "selected" : "" ?> value="0">Inactive</option>
+                                        <option <?= $college->status == 0 ? "selected" : "" ?> value="0">Inactive</option>
                                     </select>
                                 </div>
                             </div>

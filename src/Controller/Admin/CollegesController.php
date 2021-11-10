@@ -103,6 +103,60 @@ class CollegesController extends AppController
             "contain" => [] /* right now: no assossiation with this table -> blank (?) */
         ]);
 
+        // Collect data from form (some users use post or patch (?))
+        if ($this->request->is(["post", "put", "patch"])) {
+            // get all values from form-inputs
+            $collegeData = $this->request->getData();
+
+            // get value of input with id #cover_image
+            $fileObject = $this->request->getData("cover_image");
+            // get filename & extension
+            $filename = $fileObject->getClientFilename();
+            $fileExtenstion = $fileObject->getClientMediaType();
+
+            // If user uploaded a new image file from edit-page
+            if (!empty($filename)) {
+                // check if new file is an image (using the extension)
+                $valid_extension = array("image/png", "image/jpg", "image/jpeg", "image/gif");
+                if (in_array($fileExtenstion, $valid_extension)) {
+                    // create a destination foler
+                    //   WWW_ROOT = webroot-folder
+                    //   "colleges" = a new folder "colleges" we created manually in webroot
+                    //   DS = / (Directory Seperator)
+                    $destination = WWW_ROOT . "colleges" . DS . $filename;
+
+                    // move the file to $destination
+                    $fileObject->moveTo($destination);
+
+                    // set the cover_image attribute to the filepath to the NEW image
+                    $collegeData['cover_image'] = "colleges" . DS . $filename;
+                } else {
+                    $this->Flash->error("Uploaded file is not an image");
+                }
+            }
+            // No new image uploaded
+            else {
+                // set the cover_image attribute to the filepath to the OLD image
+                $collegeData['cover_image'] = $college->cover_image;
+            }
+
+            // fill $college with values of form-inputs
+            $college = $this->Colleges->patchEntity($college, $collegeData);
+
+            // save $college
+            if ($this->Colleges->save($college)) {
+                // send success-message
+                $this->Flash->success("College has been updated successfully");
+
+                // redirect to listColleges-page (see listCollegs() method)
+                return $this->redirect(["action" => "listColleges"]);
+            } else {
+                $this->Flash->error("Failed to update college");
+            }
+
+            // showing Flash messages: see templates/layout/admin.php
+        }
+
         // Create a 'colleges' variable to use in view
         $this->set(compact("college"));
 
