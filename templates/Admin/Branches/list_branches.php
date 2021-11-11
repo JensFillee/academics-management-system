@@ -58,7 +58,7 @@ $this->html->css([
                                         <tr>
                                             <td><?= $branch->id ?></td>
                                             <td><?= "<b>Name:</b> " .  $branch->name . "<br/><b>Sessions start on: </b>" . $branch->start_date . "<br/><b>Sessions end on: </b>" . $branch->end_date ?></td>
-                                            <td><?= $branch->college_id ?></td>
+                                            <td><?= isset($branch->branch_college->name) ? $branch->branch_college->name : "N/A" ?></td> <!-- show collegename if linked to a college, else: "N/A" -->
                                             <td><?= $branch->total_seats ?></td>
                                             <td><?= $branch->total_duration ?></td>
                                             <td>
