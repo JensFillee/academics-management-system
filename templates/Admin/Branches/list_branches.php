@@ -62,8 +62,20 @@ $this->html->css([
                                             <td><?= $branch->total_seats ?></td>
                                             <td><?= $branch->total_duration ?></td>
                                             <td>
+                                                <?=
+                                                $this->Form->create($branch, [
+                                                    "id" => "frm-delete-branch-" . $branch->id,
+                                                    "action" => $this->Url->build('/admin/delete-branch/' . $branch->id, ['fullBase' => true]),
+                                                    "type" => "delete"
+                                                ])
+                                                ?>
+                                                <input type="hidden" value="<?= $branch->id ?>" name="id">
+                                                <?=
+                                                $this->Form->end()
+                                                ?>
+
                                                 <a href="<?= $this->Url->build('/admin/edit-branch/' . $branch->id, ['fullBase' => true]) ?>" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
-                                                <a href="" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+                                                <a href="javascript:void(0)" onclick="if( confirm('Are you sure you want to delete his branch?') ) { $('#frm-delete-branch-<?= $branch->id ?>').submit() }" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
 
