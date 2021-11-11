@@ -45,76 +45,93 @@ $this->Html->css("pickmeup.css", ["block" => "topStyleLinks"])
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form id="frm-add-branch">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="name">Name*</label>
-                                        <input type="text" required name="name" id="name" placeholder="Enter name" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea class="form-control" name="description" id="description" placeholder="Enter text"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="college_id">Select College*</label>
-                                        <select required class="form-control" name="college_id" id="college_id">
-                                            <option value="1">Sample College</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="total_seats">Number of Seats*</label>
-                                        <input type="number" min="150" class="form-control" required name="total_seats" id="total_seats" placeholder="Enter number of seats"></input>
-                                    </div>
+                        <?=
+                        $this->Form->create($branch, [
+                            "id" => "frm-add-branch",
+                        ])
+
+                        ?>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Name*</label>
+                                    <input type="text" required name="name" id="name" placeholder="Enter name" class="form-control">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="start_date">Session Start Date*</label>
-                                        <input type="text" required name="start_date" id="start_date" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="end_date">Session End Date*</label>
-                                        <input type="text" required name="end_date" id="end_date" class="form-control">
-                                    </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" name="description" id="description" placeholder="Enter text"></textarea>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="total_durations">Duration*</label>
-                                        <input class="form-control" type="number" required min="10" name="total_durations" id="total_durations" placeholder="Enter duration">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="status">Status*</label>
-                                        <select required class="form-control" name="status" id="status">
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <button name="btn_submit" class="btn btn-success">Submit</button>
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="college_id">Select College*</label>
+                                    <select required class="form-control" name="college_id" id="college_id">
+                                        <option value="">Choose College</option>
+                                        <?php
+                                        if (count($colleges) > 0) {
+                                            foreach ($colleges as $index => $college) {
+                                        ?>
+                                                <option value="<?= $college->id ?>"> <?= strtoupper($college->name) ?> </option>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
-                        </form>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="total_seats">Number of Seats*</label>
+                                    <input type="number" min="150" class="form-control" required name="total_seats" id="total_seats" placeholder="Enter number of seats"></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="start_date">Session Start Date*</label>
+                                    <input type="text" required name="start_date" id="start_date" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="end_date">Session End Date*</label>
+                                    <input type="text" required name="end_date" id="end_date" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="total_duration">Duration (in years)*</label>
+                                    <input class="form-control" type="number" required name="total_duration" id="total_duration" placeholder="Enter duration">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="status">Status*</label>
+                                    <select required class="form-control" name="status" id="status">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <button name="btn_submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?= $this->Form->end() ?>
+
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -134,13 +151,12 @@ $this->Html->script([
 ?>
 
 <?php
-  // open tag: <script>
-  $this->Html->scriptStart(["block" => true]);
-    // content of script tag
-    echo '$("#frm-add-branch").validate();';
-    echo 'pickmeup("input#start_date", { hide_on_select: true, position: "right"});';
-    echo 'pickmeup("input#end_date", { hide_on_select: true, position: "right"});';
-  // close tag: </script>
-  $this->Html->scriptEnd();
+// open tag: <script>
+$this->Html->scriptStart(["block" => true]);
+// content of script tag
+echo '$("#frm-add-branch").validate();';
+echo 'pickmeup("input#start_date", { hide_on_select: true, position: "right"});';
+echo 'pickmeup("input#end_date", { hide_on_select: true, position: "right"});';
+// close tag: </script>
+$this->Html->scriptEnd();
 ?>
-
