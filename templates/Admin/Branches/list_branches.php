@@ -62,7 +62,7 @@ $this->html->css([
                                             <td><?= $branch->total_seats ?></td>
                                             <td><?= $branch->total_duration ?></td>
                                             <td>
-                                                <a href="" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
+                                                <a href="<?= $this->Url->build('/admin/edit-branch/' . $branch->id, ['fullBase' => true]) ?>" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
                                                 <a href="" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
