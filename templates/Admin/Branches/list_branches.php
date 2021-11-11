@@ -46,12 +46,31 @@ $this->html->css([
                                     <th>Branch Info</th>
                                     <th>College Name</th>
                                     <th>Total Seats</th>
-                                    <th>Total Duration</th>
+                                    <th>Total Duration (in years)</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                if (count($branches) > 0) {
+                                    foreach ($branches as $branch) {
+                                ?>
+                                        <tr>
+                                            <td><?= $branch->id ?></td>
+                                            <td><?= "<b>Name:</b> " .  $branch->name . "<br/><b>Sessions start on: </b>" . $branch->start_date . "<br/><b>Sessions end on: </b>" . $branch->end_date ?></td>
+                                            <td><?= $branch->college_id ?></td>
+                                            <td><?= $branch->total_seats ?></td>
+                                            <td><?= $branch->total_duration ?></td>
+                                            <td>
+                                                <a href="" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
+                                                <a href="" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
 
+                                <?php
+                                    }
+                                }
+                                ?>
                             </tbody>
                             <tfoot>
                                 <tr>

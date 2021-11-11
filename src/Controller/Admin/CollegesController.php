@@ -20,6 +20,7 @@ class CollegesController extends AppController
         // Create an empty College
         $college = $this->Colleges->newEmptyEntity();
 
+        // If form is submitted
         // Collect data from form
         if ($this->request->is("post")) {
             // get value of input with id #cover_image
