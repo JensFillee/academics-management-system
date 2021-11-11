@@ -140,5 +140,19 @@ class BranchesController extends AppController
 
     public function deleteBranch($id = null)
     {
+        // Allow both post & delete-methods
+        $this->request->allowMethod(["post", "delete"]);
+
+        // Get branch with id from URL
+        $branch = $this->Branches->get($id);
+
+        // Delete the branch
+        if ($this->Branches->delete($branch)) {
+            $this->Flash->success("Branch has been deleted successfully");
+        } else {
+            $this->Flash->error("Failed to delete branch");
+        }
+
+        return $this->redirect(["action" => "listBranches"]);
     }
 }
