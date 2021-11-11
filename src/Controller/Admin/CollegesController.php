@@ -68,7 +68,7 @@ class CollegesController extends AppController
                     // send success-message
                     $this->Flash->success("College has been created successfully");
 
-                    // redirect to listColleges-page (see listCollegs() method)
+                    // redirect to listColleges-page (see listColleges() method)
                     return $this->redirect(["action" => "listColleges"]);
                 } else {
                     $this->Flash->error("Failed to create college");
@@ -148,7 +148,7 @@ class CollegesController extends AppController
                 // send success-message
                 $this->Flash->success("College has been updated successfully");
 
-                // redirect to listColleges-page (see listCollegs() method)
+                // redirect to listColleges-page (see listColleges() method)
                 return $this->redirect(["action" => "listColleges"]);
             } else {
                 $this->Flash->error("Failed to update college");
@@ -165,5 +165,19 @@ class CollegesController extends AppController
 
     public function deleteCollege($id = null)
     {
+        // Allow both post & delete-methods
+        $this->request->allowMethod(["post", "delete"]);
+        // Get the college with the id that is passed in URL
+        $college = $this->Colleges->get($id);
+
+        // Delete college
+        if($this->Colleges->delete($college)) {
+            $this->Flash->success("College has been deleted successfully");
+        } else {
+            $this->Flash->error("Failed to delete college");
+        }
+
+        // Redirect to listColleges-page (see listColleges() method)
+        return $this->redirect(["action" => "listColleges"]);
     }
 }

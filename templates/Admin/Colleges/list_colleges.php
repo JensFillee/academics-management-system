@@ -60,8 +60,27 @@ $this->html->css([
                                             <td><?= $college->short_name ?></td>
                                             <td><?= $this->Html->image("/" . $college->cover_image, ["style" => "width:70px;height:70px"]) ?></td> <!-- '/' because not in img-folder -->
                                             <td>
-                                                <a class="btn btn-warning" href="<?= $this->Url->build('/admin/edit-college/' . $college->id, ['fullBase' => true]) ?>"><i class="fa fa-pencil-alt"></i></a>
-                                                <a class="btn btn-danger" href="#"><i class="fa fa-trash-alt"></i></a>
+                                                <!-- form that goes to deleteCollege()-method with hidden input-field to give ID to controller (?)-->
+                                                <?=
+                                                $this->Form->create($college, [
+                                                    "id" => "frm-delete-college-" . $college->id,
+                                                    "action" => $this->Url->build('/admin/delete-college/' . $college->id, ['fullBase' => true]),
+                                                    "type" => "delete"
+                                                ])
+                                                ?>
+                                                <input type="hidden" value="<?= $college->id ?>" name="id">
+                                                <?=
+                                                $this->Form->end()
+                                                ?>
+                                                <!-- Form that doesn't work -->
+                                                <!-- <form id="frm-delete-college-<?= $college->id ?>" action="<?= $this->Url->build('/admin/delete-college/' . $college->id, ['fullBase' => true]) ?>" method="post">
+                                                    <input type="hidden" value="<?= $college->id ?>" name="id">
+                                                </form> -->
+
+                                                <a href="<?= $this->Url->build('/admin/edit-college/' . $college->id, ['fullBase' => true]) ?>" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
+                                                <!-- show a confirm-box -> submit form -->
+                                                <!-- href="javascript:void(0)" makes sure browser doesn't open a plain-text page with the result of the javascript-event -->
+                                                <a href="javascript:void(0)" onclick="if( confirm('Are you sure you want to delete this college?') ) { $('#frm-delete-college-<?= $college->id ?>').submit() }" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                 <?php
