@@ -64,7 +64,8 @@ $this->html->css([
                                                 <?= "<b>Phone number:</b> " .  $student->phone_no ?><br />
                                                 <?= "<b>Bloodgroup:</b> " .  $student->blood_group ?><br />
                                             <td>
-                                                <button class="btn btn-info" data-toggle="modal" data-target="#mdl-allot-college">Allot College</button>
+                                                <button class="btn btn-info btn-allot-modal" data-id="<?= $student->id ?>" data-toggle="modal" data-target="#mdl-allot-college">Allot College</button>
+                                                <!-- keep student-id in a data-attribute -->
                                             </td>
                                             <td><?= strtoupper($student->gender) ?></td>
                                             <td>
@@ -117,31 +118,50 @@ $this->html->css([
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="javascript:void(0)" method="post">
-                    <div class="form-group">
-                        <label for="dd_college">Select college:</label>
-                        <select name="dd_college" id="dd_college" class="form-control">
-                            <option value="">Choose college</option>
-                            <?php
-                            if (count($colleges) > 0) {
-                                foreach ($colleges as $index => $college) {
-                            ?>
-                                    <option value="<?= $college->id ?>"><?= strtoupper($college->name) ?></option>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </select> <!-- dd = dropdown -->
-                    </div>
-                    <div class="form-group">
-                        <label for="dd_branch">Select branch:</label>
-                        <select name="dd_branch" id="dd_branch" class="form-control">
-                            <option value="">Choose branch</option>
-                        </select> <!-- dd = dropdown -->
-                    </div>
+                <!-- <form id="frm-allot-college" method="post" action="<?= $this->Url->build("/admin/assign-college", ["fullBase" => true]) ?>"> -->
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                <?=
+                $this->Form->create(null, [
+                    "id" => "frm-allot-college",
+                    "type" => "post",
+                    /* when form is submitted: call the new 'assignCollegeBranch'-function in StudentsController */
+                    /* 2 ways to to this (both work) */
+                    /* "action" => $this->Url->build("/admin/assign-college", ["fullBase" => true]) */
+                    "url" => [
+                        "controller" => "Students",
+                        "action" => "assignCollegeBranch", /* when form is submitted: call the new 'assignCollegeBranch'-function in StudentsController */
+                        "prefix" => "Admin"
+                    ]
+                ]);
+                ?>
+
+                <input type="hidden" id="student_id" name="student_id" value="">
+
+                <div class="form-group">
+                    <label for="dd_college">Select college:</label>
+                    <select name="college_id" id="dd_college" class="form-control">
+                        <option value="">Choose college</option>
+                        <?php
+                        if (count($colleges) > 0) {
+                            foreach ($colleges as $index => $college) {
+                        ?>
+                                <option value="<?= $college->id ?>"><?= strtoupper($college->name) ?></option>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </select> <!-- dd = dropdown -->
+                </div>
+                <div class="form-group">
+                    <label for="dd_branch">Select branch:</label>
+                    <select name="branch_id" id="dd_branch" class="form-control">
+                        <option value="">Choose branch</option>
+                    </select> <!-- dd = dropdown -->
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <?= $this->Form->end() ?>
             </div>
         </div>
     </div>
@@ -160,7 +180,13 @@ $this->Html->script([
 $this->Html->scriptStart(["block" => true]);
 // content of script tag
 echo '$("#tbl-students").DataTable();';
-// show branches based on selected college
+//
+echo '$(document).on("click", ".btn-allot-modal", function() {
+    /* fill hidden input in modal-form (#student) with student_id (from data-attribute)*/
+    var student_id = $(this).attr("data-id");
+    $("#student_id").val(student_id);
+});';
+// show branches based on selected college (ajax request)
 echo '$(document).on("change", "#dd_college", function () {
     /* when selected college changes -> update postdata variable */
     var college_id = $(this).val();
