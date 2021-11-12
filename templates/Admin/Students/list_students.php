@@ -64,7 +64,7 @@ $this->html->css([
                                                 <?= "<b>Phone number:</b> " .  $student->phone_no ?><br />
                                                 <?= "<b>Bloodgroup:</b> " .  $student->blood_group ?><br />
                                             <td>
-                                                <button class="btn btn-info">Allot College</button>
+                                                <button class="btn btn-info" data-toggle="modal" data-target="#mdl-allot-college">Allot College</button>
                                             </td>
                                             <td><?= strtoupper($student->gender) ?></td>
                                             <td>
@@ -103,6 +103,49 @@ $this->html->css([
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>
+
+<!-- Allot College Modal -->
+<div class="modal" id="mdl-allot-college">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Assign College & Branch</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="javascript:void(0)" method="post">
+                    <div class="form-group">
+                        <label for="dd_college">Select college:</label>
+                        <select name="dd_college" id="dd_college" class="form-control">
+                            <option value="">Choose college</option>
+                            <?php
+                            if (count($colleges) > 0) {
+                                foreach ($colleges as $index => $college) {
+                            ?>
+                                    <option value="<?= $college->id ?>"><?= strtoupper($college->name) ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select> <!-- dd = dropdown -->
+                    </div>
+                    <div class="form-group">
+                        <label for="dd_branch">Select branch:</label>
+                        <select name="dd_branch" id="dd_branch" class="form-control">
+                            <option value="">Choose branch</option>
+                        </select> <!-- dd = dropdown -->
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- DataTables -->
 <?=

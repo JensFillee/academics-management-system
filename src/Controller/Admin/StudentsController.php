@@ -13,6 +13,7 @@ class StudentsController extends AppController
         $this->viewBuilder()->setLayout("admin");
 
         $this->loadModel("Students");
+        $this->loadModel("Colleges");
     }
 
     public function addStudent()
@@ -64,7 +65,10 @@ class StudentsController extends AppController
             },
         ])->toList();
 
-        $this->set(compact("students"));
+        // Get colleges to show in Allot college dropdown
+        $colleges = $this->Colleges->find()->select(["id", "name"])->toList();
+
+        $this->set(compact("students", "colleges"));
 
         $this->set("title", "List Students | Academics Management");
     }
