@@ -64,8 +64,46 @@ $this->html->css([
                                                 <?= "<b>Phone number:</b> " .  $student->phone_no ?><br />
                                                 <?= "<b>Bloodgroup:</b> " .  $student->blood_group ?><br />
                                             <td>
-                                                <button class="btn btn-info btn-allot-modal" data-id="<?= $student->id ?>" data-toggle="modal" data-target="#mdl-allot-college">Allot College</button>
-                                                <!-- keep student-id in a data-attribute -->
+                                                <?php
+                                                /* If college & branch names both have a value (not null) */
+                                                if (isset($student->student_college->name) && isset($student->student_college->name)) {
+                                                    /* Show college & branch */
+                                                    echo "<b>College: </b>" . $student->student_college->name;
+                                                    echo "<br/>";
+                                                    echo "<b>Branch: </b>" . $student->student_branch->name;
+                                                    echo "<br/>";
+                                                ?>
+                                                    <?=
+                                                    $this->Form->create(null, [
+                                                        "id" => "frm-remove-allotment-" . $student->id,
+                                                        "action" => $this->Url->build("/admin/remove-assigned-college/" . $student->id),
+                                                        "type" => "post"
+                                                    ]);
+                                                    ?>
+
+                                                    <input type="hidden" name="student_id" id="student_id" value="<?= $student->id ?>">
+
+                                                    <?=
+                                                    $this->Form->end();
+                                                    ?>
+                                                    <!--                                                 <form action="<?= $this->Url->build("/admin/remove-assigned-college/" . $student->id, ["fullBase" => true]) ?>" method="post" id="frm-remove-allotment-<?= $student->id ?>">
+                                                    <input type="hidden" name="student_id" id="student_id" value="<?= $student->id ?>">
+                                                </form> -->
+
+                                                    <!-- Link to change college/branch | Link to remove college/branch -->
+                                                    <a href="javascript:void(0)" class="btn-allot-modal" data-id="<?= $student->id ?>" data-toggle="modal" data-target="#mdl-allot-college">Change</a>
+                                                    |
+                                                    <a href="javascript:void(0)" data-id="<?= $student->id ?>" onclick="if( confirm('Are you sure you want to remove the assigned college and branch of this student?') ) { $('#frm-remove-allotment-<?= $student->id ?>').submit() }">Remove</a>
+
+                                                <?php
+                                                    /* else: show "Allot College" button */
+                                                } else {
+                                                ?>
+                                                    <!-- keep student-id in a data-attribute -->
+                                                    <button class="btn btn-info btn-allot-modal" data-id="<?= $student->id ?>" data-toggle="modal" data-target="#mdl-allot-college">Allot College</button>
+                                                <?php
+                                                }
+                                                ?>
                                             </td>
                                             <td><?= strtoupper($student->gender) ?></td>
                                             <td>
@@ -180,13 +218,13 @@ $this->Html->script([
 $this->Html->scriptStart(["block" => true]);
 // content of script tag
 echo '$("#tbl-students").DataTable();';
-//
+// click "Allot College" -> pass student_id to hidden input in modal
 echo '$(document).on("click", ".btn-allot-modal", function() {
     /* fill hidden input in modal-form (#student) with student_id (from data-attribute)*/
     var student_id = $(this).attr("data-id");
     $("#student_id").val(student_id);
 });';
-// show branches based on selected college (ajax request)
+// change selected college -> show branches of this college (ajax request)
 echo '$(document).on("change", "#dd_college", function () {
     /* when selected college changes -> update postdata variable */
     var college_id = $(this).val();

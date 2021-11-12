@@ -66,6 +66,9 @@ class StudentsController extends AppController
             },
         ])->toList();
 
+        // print_r($students);
+        // in result: we see for example [student_college] -> [name]
+
         // Get colleges to show in Allot college dropdown
         $colleges = $this->Colleges->find()->select(["id", "name"])->toList();
 
@@ -123,7 +126,7 @@ class StudentsController extends AppController
             $student = $this->Students->patchEntity($student, $studentData);
 
             // Save $student
-            if($this->Students->save($student)) {
+            if ($this->Students->save($student)) {
                 $this->Flash->success("College and branch assigned successfully to student");
             } else {
                 $this->Flash->error("Failed to assign college/branch to student");
@@ -132,5 +135,25 @@ class StudentsController extends AppController
             // Redirect to list
             return $this->redirect(["action" => "listStudents"]);
         }
+    }
+
+    public function removeAssignedCollegeBranch($id = null)
+    {
+        // Get student with id from URL
+        $student = $this->Students->get($id);
+
+        // Set branch_id & college_id to null
+        $student['branch_id'] = null;
+        $student['college_id'] = null;
+
+        // Save Student
+        if ($this->Students->save($student)) {
+            $this->Flash->success("Assigned college/branch removed successfully");
+        } else {
+            $this->Flash->error("Failed to remove college/branch");
+        }
+
+        // Redirect to list
+        return $this->redirect(["action" => "listStudents"]);
     }
 }
