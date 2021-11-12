@@ -70,6 +70,8 @@ Router::prefix("admin", function (RouteBuilder $route) {
     $route->connect("/edit-student/:id", ["controller" => "Students", "action" => "editStudent"], ["pass" => array("id")]);
     $route->connect("/delete-student/:id", ["controller" => "Students", "action" => "deleteStudent"], ["pass" => array("id")]);
 
+    $route->connect("/allot-college", ["controller" => "Students", "action" => "getCollegeBranches"]);
+
     // staff routes
     $route->connect("/add-staff", ["controller" => "Staffs", "action" => "addStaff"]);
     $route->connect("/list-staff", ["controller" => "Staffs", "action" => "listStaff"]);
