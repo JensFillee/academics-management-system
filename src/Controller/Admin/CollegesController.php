@@ -42,11 +42,11 @@ class CollegesController extends AppController
             */
             // get filename & extension (see above)
             $filename = $fileObject->getClientFilename();
-            $fileExtenstion = $fileObject->getClientMediaType();
+            $fileExtension = $fileObject->getClientMediaType();
 
             // check if file is an image (using the extension)
             $valid_extension = array("image/png", "image/jpg", "image/jpeg", "image/gif");
-            if (in_array($fileExtenstion, $valid_extension)) {
+            if (in_array($fileExtension, $valid_extension)) {
                 // create a destination foler
                 //   WWW_ROOT = webroot-folder
                 //   "colleges" = a new folder "colleges" we created manually in webroot

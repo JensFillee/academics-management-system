@@ -69,8 +69,8 @@ $this->Html->css("pickmeup.css", ["block" => "topStyleLinks"])
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="description">Phone Number*</label>
-                                    <input type="text" class="form-control" required name="phone_number" id="phone_number" placeholder="Enter phone number"></textarea>
+                                    <label for="phone_no">Phone Number*</label>
+                                    <input type="text" class="form-control" required name="phone_no" id="phone_no" placeholder="Enter phone number"></textarea>
                                 </div>
                             </div>
                             <div class="col-sm-6">

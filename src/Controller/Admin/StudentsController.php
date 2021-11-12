@@ -24,11 +24,11 @@ class StudentsController extends AppController
             $filename = $fileObject->getClientFilename();
             $fileExtension = $fileObject->getClientMediaType();
 
-            $valid_extenstion = array("image/png", "image/jpg", "image/jpeg", "image/gif");
+            $valid_extension = array("image/png", "image/jpg", "image/jpeg", "image/gif");
 
-            if (in_array($fileExtension, $valid_extenstion)) {
-                $destionation = WWW_ROOT . "students" . DS . $filename;
-                $fileObject->moveTo($destionation);
+            if (in_array($fileExtension, $valid_extension)) {
+                $destination = WWW_ROOT . "students" . DS . $filename;
+                $fileObject->moveTo($destination);
 
                 $studentData = $this->request->getData();
                 $studentData["profile_image"] = WWW_ROOT . "students" . DS . $filename;
@@ -54,6 +54,18 @@ class StudentsController extends AppController
 
     public function listStudents()
     {
+        // We only want certain columns of associated tables
+        $students = $this->Students->find()->contain([
+            "studentCollege" => function($q) {
+                return $q->select(["id", "name"]);
+            },
+            "studentBranch" => function($q) {
+                return $q->select(["id", "name"]);
+            },
+        ])->toList();
+
+        $this->set(compact("students"));
+
         $this->set("title", "List Students | Academics Management");
     }
 

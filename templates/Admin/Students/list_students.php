@@ -52,7 +52,34 @@ $this->html->css([
                                 </tr>
                             </thead>
                             <tbody>
-
+                                <?php
+                                if (count($students) > 0) {
+                                    foreach ($students as $student) {
+                                ?>
+                                        <tr>
+                                            <td><?= $student->id ?></td>
+                                            <td>
+                                                <?= "<b>Name:</b> " .  $student->name ?><br />
+                                                <?= "<b>Email:</b> " .  $student->email ?><br />
+                                                <?= "<b>Phone number:</b> " .  $student->phone_no ?><br />
+                                                <?= "<b>Bloodgroup:</b> " .  $student->blood_group ?><br />
+                                            <td>
+                                                <button class="btn btn-info">Allot College</button>
+                                            </td>
+                                            <td><?= strtoupper($student->gender) ?></td>
+                                            <td>
+                                                <?= $this->Html->image("/" . $student->profile_image, ["style" => "width:70px; height:70px"]) ?>
+                                            </td>
+                                            <td><?= $student->status == 1 ? "<button class='btn btn-success'>Active</button>" : "<button class='btn btn-danger'>Inactive</button>" ?></td>
+                                            <td>
+                                                <a href="" class="btn btn-warning"><i class="fa fa-pencil-alt"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                <?php
+                                    }
+                                }
+                                ?>
                             </tbody>
                             <tfoot>
                                 <tr>
