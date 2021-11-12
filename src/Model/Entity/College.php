@@ -8,6 +8,7 @@ class College extends Entity
 {
     // in $_accessible: define all columns that need to be inserted into table
     // make all attributes of table "must assign" (because we have input fields for all columns in our add_college.php-form)
+    // used by patchEntity()-method
     protected $_accessible = [
         "name" => true,
         "short_name" => true,

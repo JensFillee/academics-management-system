@@ -11,10 +11,16 @@ class StudentsController extends AppController
         parent::initialize();
         // Use templates/layout/admin.php as default layout of this controller
         $this->viewBuilder()->setLayout("admin");
+
+        $this->loadModel("Students");
     }
 
     public function addStudent()
     {
+        $student = $this->Students->newEmptyEntity();
+
+        $this->set(compact("student"));
+
         $this->set("title", "Add Student | Academics Management");
     }
 
