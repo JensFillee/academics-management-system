@@ -160,6 +160,33 @@ $this->Html->script([
 $this->Html->scriptStart(["block" => true]);
 // content of script tag
 echo '$("#tbl-students").DataTable();';
+// show branches based on selected college
+echo '$(document).on("change", "#dd_college", function () {
+    /* when selected college changes -> update postdata variable */
+    var college_id = $(this).val();
+    var postdata = "college_id=" + college_id;
+    /* send AJAX GET request */
+    /* $.get(URL, data, function) */
+    $.get("' . $this->Url->build("/admin/allot-college", ["fullBase" => true]) . '", postdata, function (response) {
+        var data = $.parseJSON(response);
+
+        if(data.status) {
+            /* put all options in a variable */
+            /* default value = only "Choose branch" */
+            var branchOptionsHtml = "<option value=\'\'>Choose branch</option>";
+
+            /* add an option foreach branch of selected college (= data.branches (see controller)) */
+            $.each(data.branches, function(index, item) {
+                branchOptionsHtml += "<option value=\'" + item.id + "\'>" +
+                                        item.name +
+                                     "</option>"
+            });
+
+            /* show the options */
+            $("#dd_branch").html(branchOptionsHtml);
+        }
+    });
+});';
 // close tag: </script>
 $this->Html->scriptEnd();
 ?>

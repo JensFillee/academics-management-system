@@ -14,6 +14,7 @@ class StudentsController extends AppController
 
         $this->loadModel("Students");
         $this->loadModel("Colleges");
+        $this->loadModel("Branches");
     }
 
     public function addStudent()
@@ -80,5 +81,26 @@ class StudentsController extends AppController
 
     public function deleteStudent($id = null)
     {
+    }
+
+    public function getCollegeBranches() {
+        // We don't need to render any layout (no view)
+        $this->autoRender = false;
+
+        // Get college_id, submitted from AJAX-request
+        $college_id = $this->request->getQuery("college_id");
+
+        // Get all branches from this college (where branch->college_id = $college_id)
+        $branches = $this->Branches->find()->select(["id", "name"])->where([
+            "college_id" => $college_id
+        ])->toList();
+
+        // Return JSON-object with the branches (+ status & message)
+        // Check posted content via F12 -> Network -> allot-college?college_id=x -> Preview
+        echo json_encode(array(
+            "status" => 1,
+            "message" => "Branches found",
+            "branches" => $branches
+        ));
     }
 }
