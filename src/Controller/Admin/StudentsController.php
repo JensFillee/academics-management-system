@@ -58,10 +58,10 @@ class StudentsController extends AppController
     {
         // We only want certain columns of associated tables
         $students = $this->Students->find()->contain([
-            "studentCollege" => function($q) {
+            "studentCollege" => function ($q) {
                 return $q->select(["id", "name"]);
             },
-            "studentBranch" => function($q) {
+            "studentBranch" => function ($q) {
                 return $q->select(["id", "name"]);
             },
         ])->toList();
@@ -83,7 +83,8 @@ class StudentsController extends AppController
     {
     }
 
-    public function getCollegeBranches() {
+    public function getCollegeBranches()
+    {
         // We don't need to render any layout (no view)
         $this->autoRender = false;
 
@@ -102,5 +103,34 @@ class StudentsController extends AppController
             "message" => "Branches found",
             "branches" => $branches
         ));
+    }
+
+    public function assignCollegeBranch()
+    {
+        if ($this->request->is("post")) {
+            // Get student-id from hidden input field
+            $student_id = $this->request->getData("student_id");
+
+            // Get student with this id (without associations)
+            $student = $this->Students->get($student_id, [
+                "contain" => []
+            ]);
+
+            // Get rest of the data (college_id & branch_id)
+            $studentData = $this->request->getData();
+
+            // Fill student with this data
+            $student = $this->Students->patchEntity($student, $studentData);
+
+            // Save $student
+            if($this->Students->save($student)) {
+                $this->Flash->success("College and branch assigned successfully to student");
+            } else {
+                $this->Flash->error("Failed to assign college/branch to student");
+            }
+
+            // Redirect to list
+            return $this->redirect(["action" => "listStudents"]);
+        }
     }
 }
