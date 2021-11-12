@@ -19,6 +19,34 @@ class StudentsController extends AppController
     {
         $student = $this->Students->newEmptyEntity();
 
+        if ($this->request->is("post")) {
+            $fileObject = $this->request->getData("profile_image");
+            $filename = $fileObject->getClientFilename();
+            $fileExtension = $fileObject->getClientMediaType();
+
+            $valid_extenstion = array("image/png", "image/jpg", "image/jpeg", "image/gif");
+
+            if (in_array($fileExtension, $valid_extenstion)) {
+                $destionation = WWW_ROOT . "students" . DS . $filename;
+                $fileObject->moveTo($destionation);
+
+                $studentData = $this->request->getData();
+                $studentData["profile_image"] = WWW_ROOT . "students" . DS . $filename;
+
+                $student = $this->Students->patchEntity($student, $studentData);
+
+                if ($this->Students->save($student)) {
+                    $this->Flash->success("Student has been created successfully");
+                } else {
+                    $this->Flash->error("Failed to create student");
+                }
+
+                return $this->redirect(["action" => "listStudents"]);
+            } else {
+                $this->Flash->error("Uploaded file is not an image");
+            }
+        }
+
         $this->set(compact("student"));
 
         $this->set("title", "Add Student | Academics Management");
@@ -36,6 +64,5 @@ class StudentsController extends AppController
 
     public function deleteStudent($id = null)
     {
-
     }
 }

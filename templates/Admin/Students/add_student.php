@@ -83,24 +83,6 @@ $this->Html->css("pickmeup.css", ["block" => "topStyleLinks"])
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="college_id">Select College*</label>
-                                    <select required class="form-control" name="college_id" id="college_id">
-                                        <option value="1">Sample College</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="branch_id">Select Branch*</label>
-                                    <select required class="form-control" name="branch_id" id="branch_id">
-                                        <option value="1">Sample Branch</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
                                     <label for="gender">Select Gender*</label>
                                     <select required class="form-control" name="gender" id="gender">
                                         <option value="male">Male</option>
