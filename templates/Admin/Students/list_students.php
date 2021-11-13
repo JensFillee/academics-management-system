@@ -73,6 +73,7 @@ $this->html->css([
                                                     echo "<b>Branch: </b>" . $student->student_branch->name;
                                                     echo "<br/>";
                                                 ?>
+                                                    <!-- START: THIS IS THE PROBLEM -->
                                                     <?=
                                                     $this->Form->create(null, [
                                                         "id" => "frm-remove-allotment-" . $student->id,
@@ -89,6 +90,7 @@ $this->html->css([
                                                     <!--                                                 <form action="<?= $this->Url->build("/admin/remove-assigned-college/" . $student->id, ["fullBase" => true]) ?>" method="post" id="frm-remove-allotment-<?= $student->id ?>">
                                                     <input type="hidden" name="student_id" id="student_id" value="<?= $student->id ?>">
                                                 </form> -->
+                                                    <!-- END: THIS IS THE PROBLEM -->
 
                                                     <!-- Link to change college/branch | Link to remove college/branch -->
                                                     <a href="javascript:void(0)" class="btn-allot-modal" data-id="<?= $student->id ?>" data-toggle="modal" data-target="#mdl-allot-college">Change</a>

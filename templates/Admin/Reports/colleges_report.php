@@ -42,24 +42,40 @@ $this->html->css([
                     <div class="card-body">
                         <table id="tbl-colleges" class="table table-bordered table-striped">
                             <thead>
-                            <tr>
+                                <tr>
                                     <th>#ID</th>
                                     <th>College Info</th>
                                     <th>Short Name</th>
                                     <th>Cover Image</th>
-                                    <th>Actions</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+                                <?php
+                                if (count($colleges) > 0) {
+                                    foreach ($colleges as $index => $college) {
+                                ?>
+                                        <tr>
+                                            <td><?= $college->id ?></td>
+                                            <td><?= "<b>Name: </b>" . $college->name . "<br/><b>Email: </b>" . $college->email . "<br/><b>Phone number: </b>" . $college->contact_number ?></td>
+                                            <td><?= $college->short_name ?></td>
+                                            <td><?= $this->Html->image("/" . $college->cover_image, ["style" => "width:70px;height:70px"]) ?></td> <!-- '/' because not in img-folder -->
+                                            <td>
+                                                <?= $college->status == 1 ? "<button class='btn btn-success'>Active</button>" : "<button class='btn btn-danger'>Inactive</button>" ?>
+                                            </td>
+                                        </tr>
+                                <?php
+                                    }
+                                }
+                                ?>
                             </tbody>
                             <tfoot>
-                            <tr>
+                                <tr>
                                     <th>#ID</th>
                                     <th>College Info</th>
                                     <th>Short Name</th>
                                     <th>Cover Image</th>
-                                    <th>Actions</th>
+                                    <th>Status</th>
                                 </tr>
                             </tfoot>
                         </table>
