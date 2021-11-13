@@ -9,5 +9,6 @@ class StaffsTable extends Table
     public function initialize(array $config): void
     {
         // tbl_staffs
+        $this->setTable("tbl_staffs");
     }
 }
