@@ -33,7 +33,7 @@ if (!empty($title)) {
                 <!-- small box -->
                 <div class="small-box bg-dark">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3><?= $collegesCount ?></h3>
 
                         <p>Total Colleges</p>
                     </div>
@@ -48,7 +48,7 @@ if (!empty($title)) {
                 <!-- small box -->
                 <div class="small-box bg-dark">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3><?= $studentsCount ?></h3>
 
                         <p>Total Students</p>
                     </div>
@@ -63,7 +63,7 @@ if (!empty($title)) {
                 <!-- small box -->
                 <div class="small-box bg-dark">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3><?= $staffCount ?></h3>
 
                         <p>Total Staff</p>
                     </div>
