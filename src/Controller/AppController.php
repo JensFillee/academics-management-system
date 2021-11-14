@@ -60,15 +60,15 @@ class AppController extends Controller
                     "userModel" => "Users" /* model to use for authentication */
                 ]
             ], [
-                "loginAction" => [ /* where is login-page located */
+                "loginAction" => [ /* where is login-page located: /admin/users/login */
                     "controller" => "Users",
                     "action" => "login",
                     "prefix" => "Admin"
-                ], "loginRedirect" => [ /* where to go after successful login (valid credentials) */
+                ], "loginRedirect" => [ /* where to go after successful login (valid credentials): /admin/users/dashboard */
                     "controller" => "Users",
                     "action" => "dashboard", /* go to dashboard */
                     "prefix" => "Admin"
-                ], "logoutRedirect" => [ /* where to go after pressing logout button */
+                ], "logoutRedirect" => [ /* where to go after pressing logout button: /admin/users/login */
                     "controller" => "Users",
                     "action" => "login", /* go to login-page */
                     "prefix" => "Admin"
