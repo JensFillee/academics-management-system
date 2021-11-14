@@ -64,7 +64,7 @@ class AppController extends Controller
                     "controller" => "Users",
                     "action" => "login",
                     "prefix" => "Admin"
-                ], "loginRedirect" => [ /* where to go after successful login (valid credentials): /admin/users/dashboard */
+                ], "loginRedirect" => [ /* where to go after successful login (valid credentials): /admin/users/dashboard (DOESN'T WORK? GOES TO '/')*/
                     "controller" => "Dashboards",
                     "action" => "index", /* go to dashboards index */
                     "prefix" => "Admin"
