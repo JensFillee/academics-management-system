@@ -47,12 +47,16 @@ class UsersController extends AppController
                 }
             }
         }
+
+        // Set title-variable (used in login.php)
+        $this->set("title", "Log in | Academics Management");
     }
 
     public function logout()
     {
-        // logout page
-        // logout user (destroy values stored in this user's session)
+        $this->Flash->success("Logged out successfully");
+
+        // logout user (destroy values stored in this user's session) + redirect to logoutRedirect
         return $this->redirect($this->Auth->logout());
     }
 }
