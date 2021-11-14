@@ -1,3 +1,9 @@
+<?php
+if(!empty($title)) {
+    $this->assign("title", $title);
+}
+?>
+
 <?=
 $this->Form->create(null, [ /* null because no entity is being created/edited */
     "url" => [
