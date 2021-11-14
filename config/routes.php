@@ -50,10 +50,12 @@ $routes->setRouteClass(DashedRoute::class);
 /* Application Routes */
 Router::prefix("admin", function (RouteBuilder $route) {
     // homepage: index() of DashboardsController
-    // $route->connect("/", ["controller" => "Dashboards", "action" => "index"]);
+    $route->connect("/", ["controller" => "Dashboards", "action" => "index"]);
 
-    // homepage: login-page
-    $route->connect("/", ["controller" => "Users", "action" => "login"]);
+    // authentication
+    $route->connect("/users/login", ["controller" => "Users", "action" => "login"]); /* also redirected to after logout */
+    $route->connect("/users/dashboard", ["controller" => "Dashboards", "action" => "index"]); /* after login -> automatically redirected to index-method of dashboard */
+    $route->connect("/users/logout", ["controller" => "Users", "action" => "logout"]);
 
     // college routes
     $route->connect("/add-college", ["controller" => "Colleges", "action" => "addCollege"]);

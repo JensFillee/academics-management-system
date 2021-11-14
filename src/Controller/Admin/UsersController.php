@@ -10,6 +10,8 @@ class UsersController extends AppController
     {
         parent::initialize();
 
+        // user user.php-layout (= login-page)
+        $this->viewBuilder()->setLayout("user");
         // load model
         $this->loadModel("Users");
     }
@@ -17,19 +19,12 @@ class UsersController extends AppController
     // other actions
     public function login()
     {
-        /* don't use a view */
-        $this->autoRender = false;
-        echo "<h3>Login page</h3>";
-    }
+        // login page
 
-    public function dashboard()
-    {
-        /* don't use a view */
-        $this->autoRender = false;
-        echo "<h3>Dashboard page</h3>";
     }
 
     public function logout()
     {
+        // logout page
     }
 }
