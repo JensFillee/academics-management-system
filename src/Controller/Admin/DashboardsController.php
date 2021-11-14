@@ -20,6 +20,29 @@ class DashboardsController extends AppController
 
     public function index()
     {
+        // Get userdata
+        // $userdata = $this->Auth->user();
+        // echo "<pre/>";
+        // print_r($userdata);
+        // result:
+        /*
+        <pre/>Array
+        (
+            [id] => 1
+            [name] => Jens Fillée
+            [email] => jens.fillee@admin.com
+            [phone_no] => 0454129817
+            [status] => 1
+            [created_at] => Cake\I18n\FrozenTime Object
+                (
+                    [date] => 2021-10-16 14:55:55.000000
+                    [timezone_type] => 3
+                    [timezone] => UTC
+                )
+
+        )
+        */
+
         // Colleges Count
         $collegeQuery = $this->Colleges->find();
 

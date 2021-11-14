@@ -36,7 +36,7 @@ class UsersController extends AppController
                 $userdata = $this->Auth->identify();
                 // if a user is found
                 if ($userdata) {
-                    // make userdata useable in view
+                    // make userdata available through $this->Auth->user() (using it: see AppController + left-sidebar)
                     $this->Auth->setUser($userdata);
 
                     // redirect to loginRedirect-route (specified in AppController)

@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
 
 /**
  * Application Controller
@@ -81,5 +82,11 @@ class AppController extends Controller
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+    }
+
+    function beforeRender(EventInterface $event)
+    {
+        // Make $this->Auth->user() accessible in all views though $Auth variable
+        $this->set("Auth", $this->Auth->user());
     }
 }
