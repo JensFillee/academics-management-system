@@ -65,8 +65,8 @@ class AppController extends Controller
                     "action" => "login",
                     "prefix" => "Admin"
                 ], "loginRedirect" => [ /* where to go after successful login (valid credentials): /admin/users/dashboard */
-                    "controller" => "Users",
-                    "action" => "dashboard", /* go to dashboard */
+                    "controller" => "Dashboards",
+                    "action" => "index", /* go to dashboards index */
                     "prefix" => "Admin"
                 ], "logoutRedirect" => [ /* where to go after pressing logout button: /admin/users/login */
                     "controller" => "Users",
