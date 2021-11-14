@@ -50,7 +50,10 @@ $routes->setRouteClass(DashedRoute::class);
 /* Application Routes */
 Router::prefix("admin", function (RouteBuilder $route) {
     // homepage: index() of DashboardsController
-    $route->connect("/", ["controller" => "Dashboards", "action" => "index"]);
+    // $route->connect("/", ["controller" => "Dashboards", "action" => "index"]);
+
+    // homepage: login-page
+    $route->connect("/", ["controller" => "Users", "action" => "login"]);
 
     // college routes
     $route->connect("/add-college", ["controller" => "Colleges", "action" => "addCollege"]);

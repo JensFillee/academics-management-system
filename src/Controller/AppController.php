@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,6 +15,7 @@ declare(strict_types=1);
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -46,6 +48,33 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+
+        // Load auth component (in AppController -> everything is protected (every other controller extends AppController))
+        $this->loadComponent('Auth', [
+            "authenticate" => [
+                "Form" => [ /* Login-form */
+                    "fields" => [
+                        "username" => "email",  /* use email attribute (of Users) as username */
+                        "password" => "password" /* use password attribute (of Users) as password */
+                    ],
+                    "userModel" => "Users" /* model to use for authentication */
+                ]
+            ], [
+                "loginAction" => [ /* where is login-page located */
+                    "controller" => "Users",
+                    "action" => "login",
+                    "prefix" => "Admin"
+                ], "loginRedirect" => [ /* where to go after successful login (valid credentials) */
+                    "controller" => "Users",
+                    "action" => "dashboard", /* go to dashboard */
+                    "prefix" => "Admin"
+                ], "logoutRedirect" => [ /* where to go after pressing logout button */
+                    "controller" => "Users",
+                    "action" => "login", /* go to login-page */
+                    "prefix" => "Admin"
+                ]
+            ]
+        ]);
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
