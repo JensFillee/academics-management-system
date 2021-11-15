@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
-use Cake\Log\Engine\ConsoleLog;
 
 class UsersController extends AppController
 {
@@ -41,7 +40,9 @@ class UsersController extends AppController
 
                     // redirect to loginRedirect-route (specified in AppController)
                     // $this->Auth->redirectUrl() returns "/" for some reason?
-                    return $this->redirect($this->Auth->redirectUrl());
+                    // return $this->redirect($this->Auth->redirectUrl());
+                    // THIS DOES WORK (but doesn't remember page you wanted to go to, always goes to dashboards index):
+                    return $this->redirect($this->referer());
                 } else {
                     $this->Flash->error("Invalid login details");
                 }

@@ -20,6 +20,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
+use Cake\Routing\Router;
 
 /**
  * Application Controller
@@ -65,11 +66,12 @@ class AppController extends Controller
                     "controller" => "Users",
                     "action" => "login",
                     "prefix" => "Admin"
-                ], "loginRedirect" => [ /* where to go after successful login (valid credentials): /admin/users/dashboard (DOESN'T WORK? GOES TO '/')*/
-                    "controller" => "Dashboards",
-                    "action" => "index", /* go to dashboards index */
-                    "prefix" => "Admin"
-                ], "logoutRedirect" => [ /* where to go after pressing logout button: /admin/users/login */
+                ],
+                /* will be ignored if the user has an Auth.redirect value in their session */
+                /* The AuthComponent remembers what controller/action pair you were trying to get to before you were asked to authenticate yourself by storing this value in the Session, under the Auth.redirect key */
+                /* solution: see beforeFilter (DOESN'T WORK) */
+                /* solution that does work: return $this->redirect($this->referer()) (see UsersController) */
+                "logoutRedirect" => [ /* where to go after pressing logout button: /admin/users/login */
                     "controller" => "Users",
                     "action" => "login", /* go to login-page */
                     "prefix" => "Admin"
@@ -88,5 +90,18 @@ class AppController extends Controller
     {
         // Make $this->Auth->user() accessible in all views though $Auth variable
         $this->set("Auth", $this->Auth->user());
+    }
+
+    public function beforeFilter(EventInterface $event)
+    {
+        // $this->Auth->loginRedirect = array('action' => 'index', 'controller' => 'Dashboards');
+
+        // Only use Auth.redirect if you're not on login-page
+        // $url = Router::url(NULL, true); //complete url
+        // if ($url != 'http://academics_management_system.test/admin/users/login') {
+        //     $this->Session->write('Auth.redirect', $url);
+        // }
+        // echo "</pre>";
+        // print_r($url);
     }
 }
